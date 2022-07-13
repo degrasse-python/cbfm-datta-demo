@@ -24,15 +24,14 @@ class Flags:
   def __init__(self):
     """Cloudbees Feature Flag Management intial values"""
     ### --- Define the feature flags --- ###
-    # KPI
+    # KPIs
     self.enableCustomersKPI = RoxFlag(False)
-    # Login Screen
+    self.enableRevenueKPI =  RoxFlag(False)
+    self.dailySalesKPI =  RoxFlag(False)
+    self.monthlySalesKPI =  RoxFlag(False)
+    self.yearlySalesKPI =  RoxFlag(False)
     self.enableSocialSignOn = RoxFlag(False)
     # list of all dashboard options - here we give the engn team the option to revert
-    self.LineGraphVariant = RoxString('is-newversion', ['is-revert', 'is-newversion'])
-    self.enableRevenueKPI =  RoxFlag(False)
-    self.enableLineGraph =  RoxFlag(False)
-    self.enableNewTaskButton =  RoxFlag(False)
 
     # User attr
     Rox.set_custom_boolean_property('isBeta', False)

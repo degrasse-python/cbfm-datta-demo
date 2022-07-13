@@ -20,10 +20,10 @@ try:
   Rox.register('dashboard', flags)
   print("Feature Management Flags Registered")
   # Setup the environment key
-  cancel_event = Rox.setup(ROLLOUT_ENV_KEY, flags.options) #.result()
+  cancel_event = Rox.setup(ROLLOUT_ENV_KEY, flags.options).result()
   print("Feature Management Setup - Starting Server")
-  print("enableLineGraph: %s" % (flags.enableRevenueKPI.is_enabled()))
-  print("enableRevenueKPI: %s" % (flags.LineGraphVariant.get_value()))
+  print("enableCustomersKPI: %s" % (flags.enableRevenueKPI.is_enabled()))
+  print("enableRevenueKPI: %s" % (flags.enableRevenueKPI.is_enabled()))
 except Exception as e:
   print('%s (%s)' % (e, type(e)))
 
@@ -54,19 +54,14 @@ def pages(request):
         if load_template == 'admin':
             return HttpResponseRedirect(reverse('admin:index'))
         context['segment'] = load_template
+        html_template = loader.get_template('home/' + load_template)
         ### --- Feature FLAGS --- ###
         # add ff inside context dict to pass them to the templates on frontend
-        context['enableCustomersKPI'] = flags.enableCustomersKPI.get_value()
-        context['LineGraphVariant'] = flags.LineGraphVariant.get_value()
-        context['enableLineGraph'] = flags.enableLineGraph.is_enabled()
+        context['enableCustomersKPI'] = flags.enableCustomersKPI.is_enabled()
         context['enableRevenueKPI'] = flags.enableRevenueKPI.is_enabled()
-        # context['enableNewTaskButton'] = flags.enableNewTaskButton.get_value()     
-
-        html_template = loader.get_template('home/' + load_template)
         return HttpResponse(html_template.render(context, request))
 
     except template.TemplateDoesNotExist:
-
         html_template = loader.get_template('home/page-404.html')
         return HttpResponse(html_template.render(context, request))
 

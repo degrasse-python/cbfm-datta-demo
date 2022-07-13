@@ -21,7 +21,7 @@
                             <!-- [ Main Content ] start -->
                             <div class="row">
                                 <!--[ daily sales section ] start-->
-                                
+                                {% if enableRevenueKPI %}
                                 <div class="col-md-6 col-xl-4">
                                     <div class="card daily-sales">
                                         <div class="card-block">
@@ -45,6 +45,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% else %}
+                                {% endif %}
                                 <!--[ daily sales section ] end-->
                                 <!--[ Monthly  sales section ] starts-->
                                 <div class="col-md-6 col-xl-4">
